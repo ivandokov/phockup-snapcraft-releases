@@ -1,8 +1,6 @@
 base: core18
 name: phockup
-version: latest
 adopt-info: set-version
-version-script: cat $SNAPCRAFT_STAGE/lib/phockup/phockup.py | grep 'version = ' | sed "s/.*'\(.*\)'/\1/"
 summary: Photo and video sorting tool
 description: |
   Media sorting tool to organize photos and videos from your camera in folders by year, month and day.
@@ -22,7 +20,7 @@ parts:
     plugin: nil
     override-pull: |
       snapcraftctl pull
-      snapcraftctl set-version `cat $SNAPCRAFT_STAGE/lib/phockup/phockup.py | grep 'version = ' | sed "s/.*'\(.*\)'/\1/"`
+      snapcraftctl set-version `cat phockup.py | grep 'version = ' | sed "s/.*'\(.*\)'/\1/"`
   files:
     plugin: dump
     source: .
