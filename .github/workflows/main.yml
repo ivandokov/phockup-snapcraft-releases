@@ -49,5 +49,10 @@ jobs:
           diddledan/snapcraft:core18
 
         SNAP=$(find $GITHUB_WORKSPACE/phockup -maxdepth 1 -type f -name "*.snap" | head -n1)
-        echo $SNAP
         echo ::set-output name=snap::$SNAP
+        echo ::set-output name=deploy::1
+
+    - name: Deploy to Snap Store
+      run: |
+        echo ${{ steps.build.outputs.deploy }}
+        echo ${{ steps.build.outputs.snap }}
