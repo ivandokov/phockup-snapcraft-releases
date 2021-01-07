@@ -25,9 +25,6 @@ jobs:
     - id: build
       name: Build
       run: |
-        cd phockup
-        pwd
-        ls -la
         # Enable docker daemon support for --platform parameter
         echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json > /dev/null
         sudo systemctl restart docker
@@ -45,8 +42,8 @@ jobs:
           --device /dev/fuse \
           --volume /sys \
           --volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
-          --volume $GITHUB_WORKSPACE:$GITHUB_WORKSPACE \
-          --workdir $GITHUB_WORKSPACE \
+          --volume $GITHUB_WORKSPACE/phockup:$GITHUB_WORKSPACE/phockup \
+          --workdir $GITHUB_WORKSPACE/phockup \
           --platform "${{ matrix.architecture }}" \
           --env PLAYTEST="${{ matrix.playtest }}" \
           diddledan/snapcraft:core18
